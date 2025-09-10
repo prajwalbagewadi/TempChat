@@ -9,10 +9,13 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 public class Message {
-    private int userId;
-    private String data;
-    private LocalDateTime time;
-    private String status;
+    private String chatKey; //identifies the room
+    //private int userId;
+    private int senderId; //who sent
+    private int receiverId;  //who receives
+    private String data; //msg
+    private LocalDateTime time; //timestamp
+    private String status; //sent/delivered/seen
 
     public Message(){
 
@@ -24,6 +27,7 @@ public class Message {
     public void setStatus(String stat){
         this.status=stat;
     }
+    public void setChatKey(String chatKey){ this.chatKey=chatKey;}
 
     //getter
     public LocalDateTime getTime() {
@@ -32,4 +36,5 @@ public class Message {
     public String getStatus(){
         return status;
     }
+    public String getChatKey() {return chatKey;}
 }

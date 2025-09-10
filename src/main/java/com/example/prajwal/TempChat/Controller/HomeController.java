@@ -42,8 +42,8 @@ public class HomeController {
     @PostMapping("/msg")
     public String sendMsg(@RequestBody Message msg){
         System.out.println("sendMsg():");
-        msg.setTime();
-        msg.setStatus("sent");
+//        msg.setTime();
+//        msg.setStatus("sent");
         service.addMsg(msg);
         return "msg sent suceessful";
     }
