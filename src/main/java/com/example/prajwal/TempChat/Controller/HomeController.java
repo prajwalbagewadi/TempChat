@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
+//cors error talked in video telusko
+@CrossOrigin(origins = "*") // allow all origins (for testing)
 public class HomeController {
 
     @Autowired
@@ -34,7 +38,7 @@ public class HomeController {
     }
 
     @GetMapping("/msg")
-    public List<Message> getMsg(){
+    public HashMap<String, ArrayList<Message>> getMsg(){
         System.out.println("getMsg():");
         return service.getMsg();
     }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tempchat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      #chatbox {
+        height: 440px;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="open-sans">Tempchat</h1>
+    <div>
+      <label class="open-sans" style="display: flex; flex-direction: column"
+        >Create a ChatKey🔑 or Enter ChatKey🔑:<input
+          type="text"
+          id="chatkey"
+        />
+      </label>
+    </div>
+    <div id="chatbox"></div>
+    <div id="inputbox">
+      <input type="text" id="msginput" placeholder="Type a message..." />
+      <button id="sendbtn">send</button>
+    </div>
+  </body>
+  <script>
+    //get data from html form using js
+    document.getElementById("sendbtn").addEventListener("click", () => {
+      const chatKey = document.getElementById("chatkey").value;
+      const msgdata = document.getElementById("msginput").value;
+      //build Json to match Message Model in Springboot
+      const msg = {
+        chatKey: chatKey,
+        senderId: 101,
+        receiverId: 102,
+        data: msgdata,
+      };
+      //The fetch() function in JavaScript is a built-in browser API that lets you make HTTP requests (like GET, POST, PUT, DELETE) from the frontend (browser) to your backend (Spring Boot server, or any API).
+      /*syntax:
+      fetch(url, {
+        method: "POST",                  // HTTP method: GET, POST, PUT, DELETE
+        headers: {
+          "Content-Type": "application/json" // Tells backend the body is JSON
+        },
+        body: JSON.stringify(data)       // Convert JS object → JSON string
+      })
+      .then(response => response.json()) // Convert response → JSON
+      .then(data => console.log(data))   // Handle data
+      .catch(error => console.error(error));
+      */
+      fetch("http://localhost:8080/msg", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(msg),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error(error));
+    });
+  </script>
+</html>
